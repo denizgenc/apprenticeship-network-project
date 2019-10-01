@@ -1,9 +1,10 @@
-resource "aws_security_group" "sg-1" {
+resource "aws_security_group" "sg_1" {
     name = "deniz-project-b-sg-1"
     vpc_id = "${aws_vpc.vpc_1.id}"
 
     ingress {
         description = "SSH ingress from GDS IPs"
+        protocol = "tcp"
         from_port = "22"
         to_port = "22"
         cidr_blocks = ["213.86.153.212/32", "213.86.153.213/32", "213.86.153.214/32",
