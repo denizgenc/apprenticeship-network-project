@@ -4,7 +4,7 @@ resource "aws_subnet" "subnet_1" {
     availability_zone = "${var.aws_region}a" # e.g. us-east-1a
 
     tags = {
-        Name = "deniz-project-b-subnet-1"
+        Name = "deniz-project-b-subnet-1-1" # VPC 1, subnet 1
     }
 }
 
