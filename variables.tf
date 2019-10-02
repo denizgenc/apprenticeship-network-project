@@ -3,3 +3,7 @@ variable "aws_region" {
     default = "eu-west-1"
 }
 
+variable "name_prefix" {
+    description = "The prefix that should be prepended to the name of each resource."
+    default = "deniz-project-b-"
+}
