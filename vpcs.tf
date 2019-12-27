@@ -1,5 +1,6 @@
 resource "aws_vpc" "vpc_1" {
-    cidr_block = "192.168.128.0/17"
+    cidr_block = "${var.vpc_network_address_prefix}.128/${var.vpc_cidr}"
+    # Use 128 in last octet, so we keep lower bits available in case we need more device addresses.
 
     tags = {
         Name = "${var.name_prefix}vpc-1"
