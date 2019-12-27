@@ -1,3 +1,5 @@
+# This file contains variables that do not affect whether the environment is healthy or
+# misconfigured, so are shared across environments (for example CIDRs)
 variable "aws_region" {
     description = "The AWS region used when creating all these resources."
     default = "eu-west-1"
