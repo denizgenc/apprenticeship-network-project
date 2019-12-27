@@ -4,11 +4,23 @@ This houses the terraform (and potentially other files) that will relate to my C
 project.
 
 ## General Plan
-The idea for this project that was proposed to me by my line manager is that I begin with a simple
-EC2 instance, running a web server hosting a static HTML file publically with an Elastic IP.
+We need to be able to test our detection capabilities for misconfigurations in AWS and security
+weaknesses in our applications and their dependencies.
 
-From that point on I take input from architects and ethical hackers for potential vulnerabilities in my design. I improve the design to address the vulnerabilities, and then we iterate (approach
-senior colleagues, take input, improve network ...)
+We want a ring-fenced AWS infrastructure containing a number of security and reliability precautions
+and protections which can be terraformed into a number of states; a healthy state plus a number of
+weakened states. This will allow us to test our detection capabilities are operating as intended.
+
+We should be able to run the terraform with different var files or from different branches to create
+different states. Var files is probably preferable since it would be difficult to maintain
+consistency across multiple branches.
+
+The goal is to build this iteratively in an agile manner so as we complete each iteration we’ll
+validate and then add the next requirement. This doc should be maintained to capture all the
+requirements completed and those identified for future iterations.
+
+Requirements will be specified as a problem to be solved without a proposed solution. It will be up
+to Deniz to identify and implement a suitable mitigation for the given problem.
 
 ## Requirements
 

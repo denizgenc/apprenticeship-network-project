@@ -11,7 +11,7 @@ resource "aws_subnet" "subnet_1" {
 resource "aws_subnet" "subnet_2" {
     vpc_id = "${aws_vpc.vpc_1.id}"
     cidr_block = "192.168.192.0/18"
-    availability_zone = "${var.aws_region}b" # e.g. us-east-1a
+    availability_zone = "${var.aws_region}b" # e.g. us-east-1b
 
     tags = {
         Name = "${var.name_prefix}subnet-1-2" # VPC 1, subnet 1
