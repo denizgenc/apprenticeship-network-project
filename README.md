@@ -4,23 +4,28 @@ This houses the terraform (and potentially other files) that will relate to my C
 project.
 
 ## General Plan
-We need to be able to test our detection capabilities for misconfigurations in AWS and security
-weaknesses in our applications and their dependencies.
+In this project, I shall be creating a network infrastructure to host a Wordpress site. This may
+involve an EC2 and an RDS instance, along with accompanying infrastructure (VPCs, route tables,
+security groups, etc).
 
-We want a ring-fenced AWS infrastructure containing a number of security and reliability precautions
-and protections which can be terraformed into a number of states; a healthy state plus a number of
-weakened states. This will allow us to test our detection capabilities are operating as intended.
+The architecture should be defined as infrastructure-as-code (in this case, via Terraform), and the
+deployment should be scripted so that it can be replicated down the line by others.
 
-We should be able to run the terraform with different var files or from different branches to create
-different states. Var files is probably preferable since it would be difficult to maintain
-consistency across multiple branches.
+The version of Wordpress that I will be tasked to use will not necessarily be the latest one. It
+will be my responsibility to research the vulnerabilities present in the version, and find a way
+to mitigate them without needing to patch the Wordpress version.
+- The reason for this is that there can be various plug-ins etc that have a dependency on an
+  outdated version of Wordpress, etc. This may not necessarily be for my installation of Wordpress,
+  but it is still useful to simulate this constraint, as it can be common in real-world scenarios.
 
-The goal is to build this iteratively in an agile manner so as we complete each iteration we’ll
-validate and then add the next requirement. This doc should be maintained to capture all the
-requirements completed and those identified for future iterations.
-
-Requirements will be specified as a problem to be solved without a proposed solution. It will be up
-to Deniz to identify and implement a suitable mitigation for the given problem.
+In summary, this project should follow the iterative process below:
+- Set up the network that will host the WP site.
+- Research into how the current version of Wordpress is vulnerable
+- Then, for each vulnerability found:
+  - Demonstrate the vulnerability, by exploiting it. Document this.
+  - Research how to mitigate the vulnerability.
+  - Implement the mitigation, and demonstrate that you can no longer exploit the vulnerability.
+    Document this.
 
 ## Requirements
 
@@ -32,7 +37,8 @@ From the checklist provided to apprentices:
 - that includes servers, hubs, switches, routers and user devices
     - eg: (Ping, IPconfig, IPsec, Traceroute, RIPv2)
     - eg; dynamic routing protocol - OSPF, ISIS, EIGRP, BGP, RIP SNMP, EGP, RIPng,
-    - eg, static, manually administered-single network communicating with 1 or 1 other networks, connect to specific nework, provide Gateway of last Resort, reduce number of reoutes, back route.
+    - eg, static, manually administered-single network communicating with 1 or 1 other networks,
+      connect to specific network, provide Gateway of last Resort, reduce number of routes, back route.
     - eg: (security authentication-) WPA2PSK AES encryption-SSH
 
 to a given design requirement without supervision
