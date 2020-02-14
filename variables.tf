@@ -5,5 +5,5 @@ variable "aws_region" {
 
 variable "name_prefix" {
     description = "The prefix that should be prepended to the name of each resource."
-    default = "deniz-project-b-"
+    default = "deniz-project-b"
 }
