@@ -1,5 +1,5 @@
-resource "aws_security_group" "sg_1" {
-    name = "${var.name_prefix}-sg-1"
+resource "aws_security_group" "sg_web" {
+    name = "${var.name_prefix}-sg-web"
     vpc_id = "${aws_vpc.vpc_1.id}"
 
     ingress {
@@ -42,3 +42,10 @@ resource "aws_security_group" "sg_1" {
     }
 }
 
+resource "aws_security_group" "sg_database" {
+    name = "${var.name_prefix}-sg-database"
+    vpc_id = "${aws_vpc.vpc_1.id}"
+
+    # Ingress and egress should basically only be from/to the wp-server-1 IPs
+
+}
