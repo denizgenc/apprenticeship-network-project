@@ -13,6 +13,7 @@ resource "aws_db_instance" "wp_database_1" {
     engine = "postgres"
     engine_version = "11.5"
     instance_class = "db.t2.micro"
+    port = var.wp_database_port
 
     db_subnet_group_name = aws_db_subnet_group.db_subnet_group_1.name
     vpc_security_group_ids = [aws_security_group.sg_database.id]

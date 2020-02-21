@@ -47,5 +47,13 @@ resource "aws_security_group" "sg_database" {
     vpc_id = aws_vpc.vpc_1.id
 
     # Ingress and egress should basically only be from/to the wp-server-1 IPs
-    # TODO
+    ingress {
+        description = "Database connections from sg_web security group"
+        protocol = "tcp"
+        from_port = var.wp_database_port
+        to_port = var.wp_database_port
+        security_groups = [aws_security_group.sg_web.id]  # I hope this works
+    }
+
+    # TODO - egress required?
 }
