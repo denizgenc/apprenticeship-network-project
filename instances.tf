@@ -8,6 +8,11 @@ data "aws_ami" "amzn_linux_2" {
     }
 }
 
+resource "aws_key_pair" "wp_key_pair" {
+    key_name = "${var.name_prefix}-key"
+    public_key = trimspace(file(var.ssh_public_key_path))
+}
+
 resource "aws_instance" "wp_server_1" {
     ami = data.aws_ami.amzn_linux_2.id
     subnet_id = aws_subnet.subnet_web.id

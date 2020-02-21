@@ -16,3 +16,7 @@ variable "wp_database_port" {
     description = "Port used for the PostgreSQL database"
     default = 5432
 }
+
+variable "ssh_public_key_path" {
+    description = "The path to the ssh key used to connect to the web server"
+}
