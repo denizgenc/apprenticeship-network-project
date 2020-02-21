@@ -18,10 +18,10 @@ resource "aws_instance" "wp_server_1" {
     subnet_id = aws_subnet.subnet_web.id
     vpc_security_group_ids = [aws_security_group.sg_web.id]
     key_name = "${var.name_prefix}-key"
+    user_data = file("lamp_installation.sh")
     instance_type = "t2.micro"
 
     tags = {
         Name = "${var.name_prefix}-wp-server-1"
     }
 }
-
