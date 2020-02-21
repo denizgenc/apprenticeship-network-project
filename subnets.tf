@@ -29,8 +29,7 @@ resource "aws_subnet" "subnet_db_2" {
 }
 
 resource "aws_route_table_association" "subnet_web_association" {
-    # Just use the default VPC route table
-    route_table_id = aws_vpc.vpc_1.main_route_table_id
+    route_table_id = aws_route_table.route_table_web.id
     subnet_id = aws_subnet.subnet_web.id
 }
 
