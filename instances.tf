@@ -9,9 +9,9 @@ data "aws_ami" "amzn_linux_2" {
 }
 
 resource "aws_instance" "wp_server_1" {
-    ami = "${data.aws_ami.amzn_linux_2.id}"
-    subnet_id = "${aws_subnet.subnet_web.id}"
-    vpc_security_group_ids = ["${aws_security_group.sg_web.id}"]
+    ami = data.aws_ami.amzn_linux_2.id
+    subnet_id = aws_subnet.subnet_web.id
+    vpc_security_group_ids = [aws_security_group.sg_web.id]
     key_name = "${var.name_prefix}-key"
     instance_type = "t2.micro"
 

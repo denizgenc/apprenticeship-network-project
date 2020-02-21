@@ -1,6 +1,6 @@
 resource "aws_security_group" "sg_web" {
     name = "${var.name_prefix}-sg-web"
-    vpc_id = "${aws_vpc.vpc_1.id}"
+    vpc_id = aws_vpc.vpc_1.id
 
     ingress {
         description = "SSH ingress from GDS IPs"
@@ -44,8 +44,8 @@ resource "aws_security_group" "sg_web" {
 
 resource "aws_security_group" "sg_database" {
     name = "${var.name_prefix}-sg-database"
-    vpc_id = "${aws_vpc.vpc_1.id}"
+    vpc_id = aws_vpc.vpc_1.id
 
     # Ingress and egress should basically only be from/to the wp-server-1 IPs
-
+    # TODO
 }
