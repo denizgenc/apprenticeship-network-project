@@ -1,0 +1,5 @@
+bucket     = "${aws_s3_bucket.backend_bucket.id}"
+key        = "${local.state_name}"
+region     = "${var.aws_region}"
+encrypt    = true
+kms_key_id = "${aws_kms_key.remote_state_key.arn}"
