@@ -10,7 +10,7 @@ resource "aws_db_subnet_group" "db_subnet_group_1" {
 resource "aws_db_instance" "wp_database_1" {
   identifier          = "${var.name_prefix}-wp-database-1"
   allocated_storage   = 20
-  engine              = "postgres"
+  engine              = "mariadb"
   engine_version      = "11.5"
   instance_class      = "db.t2.micro"
   port                = var.wp_database_port
@@ -22,7 +22,7 @@ resource "aws_db_instance" "wp_database_1" {
   availability_zone = "${var.aws_region}b" # EC2 will be on a, so put this on b
 
   name     = "wp_database"
-  username = "postgres"
+  username = "wordpress_master_user"
   password = random_password.db_password.result
 
   tags = {
