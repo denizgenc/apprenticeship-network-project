@@ -14,7 +14,7 @@
 # Terraform and then reference that in the backend configuration
 
 resource "random_password" "db_master_password" {
-  length = 64
+  length = 41  # Longest supported MariaDB password
 }
 
 resource "aws_ssm_parameter" "db_master_password" {
@@ -25,7 +25,7 @@ resource "aws_ssm_parameter" "db_master_password" {
 }
 
 resource "random_password" "db_user_password" {
-  length = 64
+  length = 41
 }
 
 resource "aws_ssm_parameter" "db_user_password" {
