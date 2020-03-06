@@ -15,10 +15,10 @@ variable "wp_database_port" {
 
 variable "wp_database_username" {
   description = "Username used for the less privileged user account on the MariaDB database"
-  default = "wordpress"
+  default     = "wordpress"
 }
 
 variable "ssh_public_key_path" {
   description = "The path to the ssh key used to connect to the web server"
-  default = "~/.ssh/deniz-project-b-key.pub"
+  default     = "~/.ssh/deniz-project-b-key.pub"
 }

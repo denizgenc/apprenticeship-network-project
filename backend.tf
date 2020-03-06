@@ -19,9 +19,9 @@
 # detailed here: https://github.com/hashicorp/terraform/issues/13022#issuecomment-294262392
 terraform {
   backend "s3" {
-    bucket = "deniz-project-b-backend-bucket"
-    key = "terraform.tfstate"
-    region = "eu-west-2"
+    bucket  = "deniz-project-b-backend-bucket"
+    key     = "terraform.tfstate"
+    region  = "eu-west-2"
     encrypt = true
   }
 }
@@ -30,9 +30,9 @@ terraform {
 data "terraform_remote_state" "remote_state" {
   backend = "s3"
   config = {
-    bucket = "deniz-project-b-backend-bucket"
-    key = "terraform.tfstate"
-    region = "eu-west-2"
+    bucket  = "deniz-project-b-backend-bucket"
+    key     = "terraform.tfstate"
+    region  = "eu-west-2"
     encrypt = true
   }
 }
