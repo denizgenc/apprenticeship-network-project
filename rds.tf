@@ -23,7 +23,7 @@ resource "aws_db_instance" "wp_database_1" {
 
   name     = "wp_database"
   username = "postgres"
-  password = var.wp_database_password
+  password = random_password.db_password.result
 
   tags = {
     Name = "${var.name_prefix}-wp-database-1"

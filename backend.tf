@@ -4,34 +4,35 @@
 # This also involves creating an S3 bucket to act as the backend.
 
 # s3 bucket with versioning
-# see https://www.terraform.io/docs/backends/types/s3.html
-resource "aws_s3_bucket" "backend_bucket" {
-  bucket = "${var.name_prefix}-backend-bucket"
-  region = var.aws_region
-  versioning {
-    enabled = true
-  }
-}
-
-locals {
-  state_name = "terraform.tfstate"
-}
+# I'm creating the backend bucket manually because I can't figure out how to create it in
+# Terraform and then reference that in the backend configuration
+# resource "aws_s3_bucket" "backend_bucket" {
+#   bucket = "${var.name_prefix}-backend-bucket"
+#   region = var.aws_region
+#   versioning {
+#     enabled = true
+#   }
+# }
 
 # Create backend (remote state will be stored here)
 # Unfortunately we can't reference variables here, so we have to use the following workaround
 # detailed here: https://github.com/hashicorp/terraform/issues/13022#issuecomment-294262392
 terraform {
-  backend "s3" {}
+  backend "s3" {
+    bucket = "deniz-project-b-backend-bucket"
+    key = "terraform.tfstate"
+    region = "eu-west-2"
+    encrypt = true
+  }
 }
 
 # Retrieve remote state from above backend
 data "terraform_remote_state" "remote_state" {
   backend = "s3"
   config = {
-    bucket     = aws_s3_bucket.backend_bucket.id
-    key        = local.state_name
-    region     = var.aws_region
-    encrypt    = true
-    kms_key_id = aws_kms_key.remote_state_key.arn
+    bucket = "deniz-project-b-backend-bucket"
+    key = "terraform.tfstate"
+    region = "eu-west-2"
+    encrypt = true
   }
 }

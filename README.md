@@ -3,6 +3,17 @@ Cyber Apprentice network project Terraform repo
 This houses the terraform (and potentially other files) that will relate to my Cyber networking
 project.
 
+
+# Installation
+Before you do anything, you have to create an S3 bucket (preferably with versioning) and reference
+it in the `backend.tf` file, for both the terraform backend resource and the
+`terraform_remote_state` data source.
+
+You have to do this because I couldn't figure out how to create a remote state and create a 
+reference to it in the backend configuration at the same time.
+
+---------
+
 ## General Plan
 In this project, I shall be creating a network infrastructure to host a Wordpress site. This may
 involve an EC2 and an RDS instance, along with accompanying infrastructure (VPCs, route tables,

@@ -8,10 +8,6 @@ variable "name_prefix" {
   default     = "deniz-project-b"
 }
 
-variable "wp_database_password" {
-  description = "Figure out how to manage this password"
-}
-
 variable "wp_database_port" {
   description = "Port used for the PostgreSQL database"
   default     = 5432
