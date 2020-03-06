@@ -22,7 +22,7 @@ resource "aws_db_instance" "wp_database_1" {
   availability_zone = "${var.aws_region}b" # EC2 will be on a, so put this on b
 
   name     = "wp_database"
-  username = "wordpress_master_user"
+  username = "WordpressMasterUser" # Special characters need quoting, use CamelCase instead: https://dba.stackexchange.com/a/219977
   password = random_password.db_master_password.result
 
   tags = {
