@@ -9,7 +9,7 @@ variable "name_prefix" {
 }
 
 variable "wp_database_port" {
-  description = "Port used for the PostgreSQL database"
+  description = "Port used for the MariaDB database"
   default     = 5432
 }
 
