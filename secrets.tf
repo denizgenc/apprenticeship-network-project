@@ -13,13 +13,24 @@
 # I'm creating the remote state key manually because I can't figure out how to create it in
 # Terraform and then reference that in the backend configuration
 
-resource "random_password" "db_password" {
+resource "random_password" "db_master_password" {
   length = 64
 }
 
-resource "aws_ssm_parameter" "db_password" {
-  name        = "${var.name_prefix}-db-password"
-  description = "The parameter description"
+resource "aws_ssm_parameter" "db_master_password" {
+  name        = "${var.name_prefix}-db-master-password"
+  description = "The password for the master database user"
   type        = "SecureString"
-  value       = random_password.db_password.result
+  value       = random_password.db_master_password.result
+}
+
+resource "random_password" "db_user_password" {
+  length = 64
+}
+
+resource "aws_ssm_parameter" "db_user_password" {
+  name        = "${var.name_prefix}-db-user-password"
+  description = "The password for the database user `wordpress`"
+  type        = "SecureString"
+  value       = random_password.db_user_password.result
 }
