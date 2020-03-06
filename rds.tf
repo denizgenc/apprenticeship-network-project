@@ -11,7 +11,7 @@ resource "aws_db_instance" "wp_database_1" {
   identifier          = "${var.name_prefix}-wp-database-1"
   allocated_storage   = 20
   engine              = "mariadb"
-  engine_version      = "11.5"
+  engine_version      = "10.2"
   instance_class      = "db.t2.micro"
   port                = var.wp_database_port
   skip_final_snapshot = true
