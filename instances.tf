@@ -21,8 +21,8 @@ resource "aws_instance" "wp_server_1" {
   #user_data              = file("lamp_installation.sh")
   user_data     = <<END
 #!/usr/bin/env bash
-HISTFILE=~/.bash_history  # Trying to log what happens
-set -o history            # Ditto
+# HISTFILE=~/.bash_history  # Trying to log what happens
+# set -o history            # Ditto
 cd /home/ec2-user  # Makes it easier for us to check everything when sshing
 sudo yum update -y
 sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
@@ -40,17 +40,28 @@ EOF
 wget https://wordpress.org/wordpress-5.0.tar.gz
 tar -xzf wordpress-5.0.tar.gz
 cd wordpress
-echo 'export RDS_DB_ENDPOINT=${aws_db_instance.wp_database_1.endpoint}' >> .bash_profile
-echo 'export RDS_DB_NAME=${aws_db_instance.wp_database_1.name}' >> .bash_profile
-echo 'export RDS_DB_USER=${var.wp_database_username}' >> .bash_profile
-echo 'export RDS_DB_PASSWORD=${random_password.db_user_password.result}' >> .bash_profile
-wget https://raw.githubusercontent.com/denizgenc/apprenticeship-network-project/master/wp-config.php
+cat << EOF > wp-config.php
+<?php
+define('DB_NAME', '${aws_db_instance.wp_database_1.name}');
+define('DB_USER', '${var.wp_database_username}');
+define('DB_PASSWORD', '${random_password.db_user_password.result}');
+define('DB_HOST', '${aws_db_instance.wp_database_1.endpoint}');
+define( 'DB_CHARSET', 'utf8' );
+define( 'DB_COLLATE', '' );
+EOF
 curl https://api.wordpress.org/secret-key/1.1/salt/ >> wp-config.php
-curl https://raw.githubusercontent.com/denizgenc/apprenticeship-network-project/master/config-end.txt >> wp-config.php
+cat << EOF >> wp-config.php
+
+\$table_prefix  = 'wp_';
+define('WP_DEBUG', false);
+if ( !defined('ABSPATH') )
+	define('ABSPATH', dirname(__FILE__) . '/');
+require_once(ABSPATH . 'wp-settings.php');
+EOF
 cd /home/ec2-user
 sudo cp -r wordpress/* /var/www/html/
 sudo service httpd start
-history > executed_commands.txt
+# history > executed_commands.txt  # Enable with 2nd and 3rd lines of this heredoc for basic logging
 END
   instance_type = "t2.micro"
 
