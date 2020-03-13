@@ -56,4 +56,11 @@ resource "aws_security_group" "sg_database" {
   }
 
   # TODO - egress required?
+  # I'm having errors setting up MariaDB so maybe egress is required.
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    security_groups = [aws_security_group.sg_web.id]
+  }
 }
