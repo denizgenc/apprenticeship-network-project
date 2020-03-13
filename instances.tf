@@ -21,6 +21,7 @@ resource "aws_instance" "wp_server_1" {
   #user_data              = file("lamp_installation.sh")
   user_data     = <<END
 #!/usr/bin/env bash
+cd /home/ec2-user  # Makes it easier for us to check everything when sshing
 sudo yum update -y
 sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
 sudo yum install -y httpd mariadb
@@ -42,7 +43,7 @@ echo "exported a bunch of environment variables" >> log.txt
 #sudo systemctl start httpd
 #sudo systemctl enable httpd
 wget https://wordpress.org/wordpress-5.0.tar.gz
-tar -xzf latest.tar.gz
+tar -xzf wordpress-5.0.tar.gz
 cd wordpress
 wget https://raw.githubusercontent.com/denizgenc/apprenticeship-network-project/master/wp-config.php
 curl https://api.wordpress.org/secret-key/1.1/salt/ >> wp-config.php
