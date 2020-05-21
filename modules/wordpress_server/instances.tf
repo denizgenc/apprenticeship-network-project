@@ -59,7 +59,9 @@ if ( !defined('ABSPATH') )
 require_once(ABSPATH . 'wp-settings.php');
 EOF
 cd /home/ec2-user
-sudo cp -r wordpress/* /var/www/html/
+sudo cp -r -p wordpress/* /var/www/html/ # -p preserves ownership and permissions. Files have 644 and folders have 755, which is fine
+sudo chown -R apache:apache /var/www/html/* # Change ownership to the httpd account, should fix image upload issues
+sudo chmod 660 /var/www/html/wp-config.php # Only allow user and group (i.e. apache) to read the config
 sudo service httpd start
 # history > executed_commands.txt  # Enable with 2nd and 3rd lines of this heredoc for basic logging
 END
