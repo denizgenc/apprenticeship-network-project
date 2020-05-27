@@ -15,6 +15,7 @@
 
 resource "random_password" "db_master_password" {
   length = 41  # Longest supported MariaDB password
+  override_special = "!#$%&*()-_=+[]{}<>:?" # Don't include @ sign, which RDS complains about
 }
 
 resource "aws_ssm_parameter" "db_master_password" {
