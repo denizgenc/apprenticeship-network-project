@@ -27,6 +27,7 @@ resource "aws_ssm_parameter" "db_master_password" {
 
 resource "random_password" "db_user_password" {
   length = 41
+  override_special = "!#$%&*()-_=+[]{}<>:?" # Don't include @ sign, which RDS complains about
 }
 
 resource "aws_ssm_parameter" "db_user_password" {
