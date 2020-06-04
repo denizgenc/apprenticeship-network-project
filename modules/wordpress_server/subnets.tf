@@ -1,6 +1,6 @@
 resource "aws_subnet" "subnet_web" {
   vpc_id            = aws_vpc.vpc_1.id
-  cidr_block        = "192.168.0.0/17"
+  cidr_block        = "192.168.0.0/24"
   availability_zone = "${var.aws_region}a" # e.g. us-east-1a
 
   tags = {
@@ -10,7 +10,7 @@ resource "aws_subnet" "subnet_web" {
 
 resource "aws_subnet" "subnet_db_1" {
   vpc_id            = aws_vpc.vpc_1.id
-  cidr_block        = "192.168.128.0/18"
+  cidr_block        = "192.168.1.0/24"
   availability_zone = "${var.aws_region}a"
 
   tags = {
@@ -20,7 +20,7 @@ resource "aws_subnet" "subnet_db_1" {
 
 resource "aws_subnet" "subnet_db_2" {
   vpc_id            = aws_vpc.vpc_1.id
-  cidr_block        = "192.168.192.0/18"
+  cidr_block        = "192.168.2.0/24"
   availability_zone = "${var.aws_region}b"
 
   tags = {
