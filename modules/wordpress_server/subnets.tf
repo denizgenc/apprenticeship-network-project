@@ -4,7 +4,7 @@ resource "aws_subnet" "subnet_web" {
   availability_zone = "${var.aws_region}a" # e.g. us-east-1a
 
   tags = {
-    Name = "${var.name_prefix}-subnet-1-1"
+    Name = "${var.name_prefix}-subnet-web"
   }
 }
 
